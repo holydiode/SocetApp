@@ -1,12 +1,9 @@
-﻿#include <iostream>
-#include <iostream>
-#include <windows.h>
+﻿#define WIN32_LEAN_AND_MEAN
+
+#include "../SocetApp/TCPServer.h"
 #include <iostream>
 #include <string>
-#include "../SocetApp/Message.h"
-#include "../SocetApp/Socet.h"
-#include "../SocetApp/TCPClient.h"
-#include "../SocetApp/TCPServer.h"
+#include <thread>
 
 void handle_client(TCPServer* server, TCPClient* client) {
     while (true)

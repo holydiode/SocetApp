@@ -2,12 +2,8 @@
 //
 
 #include <iostream>
-#include <windows.h>
-#include <iostream>
 #include <string>
-#include "Message.h"
-#include "Socet.h"
-#include "TCPClient.h"
+#include <thread>
 #include "TCPServer.h"
 
 
@@ -50,6 +46,5 @@ void run_client(int id) {
 int main(int argc, char* argv[])
 {
     std::cout << "Hello World! I'm Client\n";
-    int ans = atoi(argv[1]);
-    run_client(ans);
+    run_client(1);
 }

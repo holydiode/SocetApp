@@ -1,5 +1,3 @@
-#include <thread>
-#include "Message.h"
 #include "TCPClient.h"
 #include <vector>
 #define MAX_MSG_LEN 100
@@ -28,6 +26,10 @@ public:
         int status = WSAStartup(MAKEWORD(2, 2), &wsa); //инициализация Winsock 2.2
         status = this->socet->init(this->IP, this->port);
         status = this->socet->bind();
+        if (status == SOCKET_ERROR)
+        {
+            std::cout << "ERROR: " << WSAGetLastError() << std::endl;
+        }
         status = listen(this->socet->sokcet, MAX_CONNECTION); //Устанавливаем сокет в режим прослушифания
         return 0;
     }
@@ -48,14 +50,16 @@ public:
     }
 
     void send_message(Message* msg) {
-        std::string msg_txt = msg->to_str();
+        
         if (id_in_connections(msg->destination_id)) {
+            std::string msg_txt = msg->to_str();
             send(this->clients[msg->destination_id]->socet->sokcet, msg_txt.c_str(), msg_txt.size(), 0);
             return;
         }
         msg->destination_id = msg->author_id;
         msg->author_id = 0;
         msg->code = Unattainable;
+        std::string msg_txt = msg->to_str();
         send(this->clients[msg->destination_id]->socet->sokcet, msg_txt.c_str(), msg_txt.size(), 0);
     }
 

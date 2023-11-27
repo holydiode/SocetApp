@@ -1,5 +1,4 @@
 #pragma once
-#pragma comment(lib, "ws2_32.lib")
 #include "Socet.h"
 #include <string>
 #include "Message.h"
