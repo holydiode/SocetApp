@@ -46,5 +46,6 @@ void run_client(int id) {
 int main(int argc, char* argv[])
 {
     std::cout << "Hello World! I'm Client\n";
-    run_client(1);
+    int ans = atoi(argv[1]);
+    run_client(ans);
 }
